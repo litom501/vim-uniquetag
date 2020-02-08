@@ -23,3 +23,25 @@ Vim 用のユニークなタグ文字列生成プラグイン
     ```
     :UniqueTag
     ```
+
+## カスタマイズ
+
+通常は、タグを `[ID:` と `]` で囲むみ、
+ファイルタイプ vim はタグを `"ref:` を先頭につける
+
+```
+  " *: [ID:67AE]
+  " vim: "ref:5CE0
+  let g:uniquetag_config = #{
+    '*': #{
+      prefix: '[ID:',
+      length: 4,
+      suffix: ']',
+    },
+    'vim': #{
+      prefix: '"ref:',
+      length: 4,
+      suffix: ''
+    }
+  }
+```

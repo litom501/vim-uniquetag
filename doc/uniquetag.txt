@@ -20,7 +20,37 @@ CONTENTS                                                  *uniquetag-contents*
 ==============================================================================
 1. INTORODUCTION                                      *uniquetag-introduction*
 
- :UniqueTag
+insert mode
+>
+	imap <ESC>t <Plug>(uniquetag-insert-tag)
+<
+normal mode
+>
+	nmap <ESC>t <Plug>(uniquetag-insert-tag)
+<
+command
+>
+	command! -nargs=0 UniqueTag normal <Plug>(uniquetag-insert-tag)
+<
+
+customize
+>
+	" *: [ID:67AE]
+	" vim: "ref:5CE0
+	let g:uniquetag_config = #{
+	  '*': #{
+	    prefix: '[ID:',
+	    length: 4,
+	    suffix: ']',
+	  },
+	  'vim': #{
+	    prefix: '"ref:',
+	    length: 4,
+	    suffix: ''
+	  }
+	}
+<
+
 
 ==============================================================================
 2. Requirements                                       *uniquetag-requirements*
@@ -51,6 +81,8 @@ b:uniquetag_config				  *b:uniquetag_config*
 g:uniquetag_config				  *g:uniquetag_config*
 
 >
+	" *: [ID:67AE]
+	" vim: "ref:5CE0
 	let g:uniquetag_config = #{
 	  '*': #{
 	    prefix: '[ID:',

@@ -26,7 +26,8 @@ augroup uniquetag
 augroup END
 
 inoremap <expr> <Plug>(uniquetag-insert-tag) uniquetag#tag()
-command! UniqueTag silent normal a<C-R>=uniquetag#tag()<ESC>
+nnoremap <silent> <Plug>(uniquetag-insert-tag) a<C-R>=uniquetag#tag()<ESC><ESC>
+"command! -nargs=0 UniqueTag normal <Plug>(uniquetag-insert-tag)
 
 let &cpo = s:save_cpo
 unlet s:save_cpo

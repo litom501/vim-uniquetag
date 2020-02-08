@@ -26,7 +26,29 @@ CONTENTS                                                  *uniquetag-contents*
 <
 ノーマルモードで使用する場合
 >
-	:UniqueTag
+	nmap <ESC>t <Plug>(uniquetag-insert-tag)
+<
+コマンドを定義
+>
+	command! -nargs=0 UniqueTag normal <Plug>(uniquetag-insert-tag)
+<
+
+ファイルタイプごとの生成定義変更
+>
+	" *: [ID:67AE]
+	" vim: "ref:5CE0
+	let g:uniquetag_config = #{
+	  '*': #{
+	    prefix: '[ID:',
+	    length: 4,
+	    suffix: ']',
+	  },
+	  'vim': #{
+	    prefix: '"ref:',
+	    length: 4,
+	    suffix: ''
+	  }
+	}
 <
 
 ==============================================================================
@@ -38,19 +60,33 @@ CONTENTS                                                  *uniquetag-contents*
 
 ------------------------------------------------------------------------------
 3.1 COMMANDS                                              *uniquetag-commands*
+このプラグインが定義するコマンドはありません。
+コマンドとして使用するには、明示的に定義してください。
+
+以下は定義例です。
 UniqueTag                                                          *UniqueTag*
+
 	カーソルの後ろにバッファ内でユニークなタグ文字列を挿入します。
+>
+	command! -nargs=0 UniqueTag normal <Plug>(uniquetag-insert-tag)
+<
 
 ------------------------------------------------------------------------------
 3.2 MAPPINGS                                              *uniquetag-mappings*
 
 <Plug>(uniquetag-insert-tag)		        *uniquetag-insert-tag*
-	挿入モード用マップ。カーソル位置にバッファ内でユニークなタグ文字列を挿
-	入します。
+	挿入モード用マップとして使用する場合、カーソル位置にバッファ内でユニー
+	クなタグ文字列を挿入します。
 
-	設定例 挿入モード <ESC>t で、タグ挿入
+	マップ設定例 挿入モード <ESC>t で、タグ挿入
 >
 	imap <ESC>t <Plug>(uniquetag-insert-tag)
+<
+
+	ノーマルモード用のマップとして使用する場合、カーソルの後ろにバッファ内
+	でユニークなタグ文字列を挿入します。
+>
+	nmap <ESC>t <Plug>(uniquetag-insert-tag)
 <
 
 ------------------------------------------------------------------------------
@@ -71,6 +107,8 @@ g:uniquetag_config				  *g:uniquetag_config*
 	b:uniquetag_config が設定されます。
 	未定義のファイルタイプに対しては設定されません。
 >
+	" *: [ID:67AE]
+	" vim: "ref:5CE0
 	let g:uniquetag_config = #{
 	  '*': #{
 	    prefix: '[ID:',
@@ -102,6 +140,8 @@ uniquetag#tag()					     *uniquetag#tag()*
 ==============================================================================
 4. CHANGELOG                                             *uniquetag-chnagelog*
 
+0.2   2020-02-08
+    - 改善 UniqueTag コマンドの廃止。マップとして定義
 0.1   2020-02-08
     - 初期バージョン
 
