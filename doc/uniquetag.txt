@@ -1,0 +1,81 @@
+*uniquetag.txt* Unique tag string generation plugin for Vim
+*uniquetag*
+
+    Generate a unique tag to point to a specific position in the text
+
+Author  : Koji Sato <litom501+vim@gmail.com>
+License : MIT License
+
+==============================================================================
+CONTENTS                                                  *uniquetag-contents*
+  1. Introduction				|uniquetag-introduction|
+  2. Requirements				|uniquetag-requirements|
+  3. Interface					|uniquetag-interface|
+    3.1 Commands				|uniquetag-commands|
+    3.2 Mappings				|uniquetag-mappings|
+    3.3 Variables				|uniquetag-variables|
+    3.4 Functions				|uniquetag-functions|
+  4. Changelog					|uniquetag-changelog|
+
+==============================================================================
+1. INTORODUCTION                                      *uniquetag-introduction*
+
+ :UniqueTag
+
+==============================================================================
+2. Requirements                                       *uniquetag-requirements*
+ Vim 8.2 rand()
+
+==============================================================================
+3. Interface                                             *uniquetag-interface*
+
+------------------------------------------------------------------------------
+3.1 COMMANDS                                              *uniquetag-commands*
+UniqueTag                                                          *UniqueTag*
+
+------------------------------------------------------------------------------
+3.2 MAPPINGS                                              *uniquetag-mappings*
+
+<Plug>(uniquetag-insert-tag)		        *uniquetag-insert-tag*
+------------------------------------------------------------------------------
+3.3 VARIABLES                                            *uniquetag-variables*
+
+b:uniquetag_config				  *b:uniquetag_config*
+>
+	let b:uniquetag_config = #{
+	  prefix: '"ref:',
+	  length: 4,
+	  suffix: ''
+	}
+<
+g:uniquetag_config				  *g:uniquetag_config*
+
+>
+	let g:uniquetag_config = #{
+	  '*': #{
+	    prefix: '[ID:',
+	    length: 4,
+	    suffix: ']',
+	  },
+	  'vim': #{
+	    prefix: '"ref:',
+	    length: 4,
+	    suffix: ''
+	  }
+	}
+<
+
+------------------------------------------------------------------------------
+3.3 FUNCTIONS                                            *uniquetag-functions*
+
+uniquetag#create(prefix, len, suffix)		  *uniquetag#create()*
+
+uniquetag#tag()					     *uniquetag#tag()*
+
+==============================================================================
+4. CHANGELOG                                             *uniquetag-chnagelog*
+
+See Japanese help or git-log.
+
+vim:tw=78:ts=8:noet:ft=help:norl:
+

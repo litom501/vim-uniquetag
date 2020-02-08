@@ -1,0 +1,108 @@
+*uniquetag.txt* Vim 用のユニークなタグ文字列生成プラグイン
+*uniquetag*
+
+    文章の特定位置を指し示すためのユニークなタグを生成します
+
+Author  : Koji Sato <litom501+vim@gmail.com>
+License : MIT License
+
+==============================================================================
+CONTENTS                                                  *uniquetag-contents*
+  1. Introduction				|uniquetag-introduction|
+  2. Requirements				|uniquetag-requirements|
+  3. Interface					|uniquetag-interface|
+    3.1 Commands				|uniquetag-commands|
+    3.2 Mappings				|uniquetag-mappings|
+    3.3 Variables				|uniquetag-variables|
+    3.4 Functions				|uniquetag-functions|
+  4. Changelog					|uniquetag-changelog|
+
+==============================================================================
+1. INTORODUCTION                                      *uniquetag-introduction*
+
+挿入モードで使用する場合
+>
+	imap <ESC>t <Plug>(uniquetag-insert-tag)
+<
+ノーマルモードで使用する場合
+>
+	:UniqueTag
+<
+
+==============================================================================
+2. Requirements                                       *uniquetag-requirements*
+ Vim 8.2 rand() 関数
+
+==============================================================================
+3. Interface                                             *uniquetag-interface*
+
+------------------------------------------------------------------------------
+3.1 COMMANDS                                              *uniquetag-commands*
+UniqueTag                                                          *UniqueTag*
+	カーソルの後ろにバッファ内でユニークなタグ文字列を挿入します。
+
+------------------------------------------------------------------------------
+3.2 MAPPINGS                                              *uniquetag-mappings*
+
+<Plug>(uniquetag-insert-tag)		        *uniquetag-insert-tag*
+	挿入モード用マップ。カーソル位置にバッファ内でユニークなタグ文字列を挿
+	入します。
+
+	設定例 挿入モード <ESC>t で、タグ挿入
+>
+	imap <ESC>t <Plug>(uniquetag-insert-tag)
+<
+
+------------------------------------------------------------------------------
+3.3 VARIABLES                                            *uniquetag-variables*
+
+b:uniquetag_config				  *b:uniquetag_config*
+>
+	let b:uniquetag_config = #{
+	  prefix: '"ref:',
+	  length: 4,
+	  suffix: ''
+	}
+<
+g:uniquetag_config				  *g:uniquetag_config*
+
+	ファイルタイプ毎のタグ生成基準を設定します。'*' は、デフォルトを指しま
+	す。ファイルを開いた際にバッファのファイルタイプに応じて 
+	b:uniquetag_config が設定されます。
+	未定義のファイルタイプに対しては設定されません。
+>
+	let g:uniquetag_config = #{
+	  '*': #{
+	    prefix: '[ID:',
+	    length: 4,
+	    suffix: ']',
+	  },
+	  'vim': #{
+	    prefix: '"ref:',
+	    length: 4,
+	    suffix: ''
+	  }
+	}
+<
+
+------------------------------------------------------------------------------
+3.3 FUNCTIONS                                            *uniquetag-functions*
+
+uniquetag#create(prefix, len, suffix)		  *uniquetag#create()*
+	現在のバッファ内でユニークな文字列を生成します。
+	文字列は、長さ len のユニーク16進数の数値に prefix と suffix が連結さ
+	れたものです。
+
+uniquetag#tag()					     *uniquetag#tag()*
+	現在のバッファに定義された生成基準によって生成された文字列をカーソル位
+	置に挿入します。
+	バッファのタグ生成基準が定められていない場合は、デフォルトの基準が使用
+	されます。
+
+==============================================================================
+4. CHANGELOG                                             *uniquetag-chnagelog*
+
+0.1   2020-02-08
+    - 初期バージョン
+
+vim:tw=78:ts=8:noet:ft=help:norl:
